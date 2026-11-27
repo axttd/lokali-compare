@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lokali · Booking details</title>
+  <script src="../shell.config.js"></script>
+  <script src="../js/shared/lock-guard.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+  <link rel="stylesheet" href="../css/lokali.css">
+  <link rel="stylesheet" href="../css/guest.css">
+  <script src="../js/lokali.js"></script>
+  <script src="../js/art.js"></script>
+  <script src="../js/data.js"></script>
+  <style>
+.bk-hero { position: relative; height: 210px; } .bk-hero img { width: 100%; height: 100%; object-fit: cover; }
+  </style>
+</head>
+<body class="m">
+<header class="appbar appbar--overlay">
+  <button class="icon-btn" data-go="g-bookings" aria-label="Back"><i class="ph ph-caret-left" aria-hidden="true"></i></button>
+  <span class="grow"></span>
+  <button class="icon-btn" aria-label="Share booking" data-toast="Booking link copied" data-toast-icon="ph-link"><i class="ph ph-export" aria-hidden="true"></i></button>
+</header>
+<div class="bk-hero"><img data-img="1786717667687-2f05e422d6f9" data-w="900" alt=""></div>
+<div class="sheet-top pad stack-lg" style="padding-top:20px;padding-bottom:28px">
+  <div class="stack" style="gap:8px">
+    <span class="badge badge--success" style="align-self:flex-start"><i class="ph-fill ph-check-circle" aria-hidden="true"></i>Confirmed · in 4 days</span>
+    <h1 style="font-size: 22px;line-height: 28px">Mangrove &amp; fireflies by kampung boat</h1>
+    <span class="small muted">Booking LK-24817</span>
+  </div>
+
+  <section class="card reveal">
+    <div class="meta-list">
+      <div><i class="ph ph-calendar-blank" aria-hidden="true"></i><span><b>Sun, 6 Dec 2026</b><br>5:00 PM – 8:30 PM · arrive by 4:45 PM</span></div>
+      <div><i class="ph ph-users" aria-hidden="true"></i><span>2 adults, 1 child · 1 vegetarian</span></div>
+    </div>
+    <div class="divider"></div>
+    <div class="row"><img class="avatar" data-img="1492562080023-ab3db95bfbce" data-w="120" alt=""><div class="grow"><b style="display:inline-flex;align-items:center;gap:6px">Pak Rahim Osman<i class="ph-fill ph-seal-check" role="img" aria-label="Identity verified" style="color:#3BA4E8;font-size:18px"></i></b><div class="small muted">Host · replies within a day</div></div></div>
+    <div class="grid-2 mt3"><button class="btn btn--primary" data-go="g-chat"><i class="ph ph-chat-circle-dots" aria-hidden="true"></i>Message</button><button class="btn btn--secondary" data-toast="Calling +60 13-347 2251" data-toast-icon="ph-phone"><i class="ph ph-phone" aria-hidden="true"></i>Call</button></div>
+  </section>
+
+  <section aria-labelledby="mp-h">
+    <h2 class="is-h3" id="mp-h" style="margin-bottom:12px">Meeting point</h2>
+    <div class="map" style="height:160px"><i class="ph-fill ph-map-pin pin-dot" style="left:48%;top:60%" aria-hidden="true"></i></div>
+    <p class="mt3"><b>Jeti Kampung Kuantan</b><br><span class="small muted">Jalan Kuantan, 45000 Kuala Selangor, Selangor</span></p>
+    <p class="small muted mt1">Look for the green boat shed next to the surau. Free parking.</p>
+    <button class="btn btn--secondary btn--block mt3" data-sheet="maps"><i class="ph ph-navigation-arrow" aria-hidden="true"></i>Get directions</button>
+  </section>
+
+  <section class="card reveal card--flat">
+    <h3 class="is-h4" style="margin-bottom:8px">Bring</h3>
+    <p class="small">Long sleeves and trousers · shoes that can get wet · water bottle · rain jacket</p>
+  </section>
+
+  <section class="card reveal" aria-labelledby="r-h">
+    <div class="row-between"><h3 id="r-h">Receipt</h3><a href="#" class="small strong" data-toast="Receipt downloaded (PDF)" data-toast-icon="ph-download-simple">Download</a></div>
+    <div class="kv mt2"><span>RM 145 × 2 adults</span><span>RM 290.00</span></div>
+    <div class="kv"><span>RM 95 × 1 child</span><span>RM 95.00</span></div>
+    <div class="kv"><span>Service fee (5%)</span><span>RM 19.25</span></div>
+    <div class="kv total"><span>Paid</span><span>RM 404.25</span></div>
+    <p class="xs muted">Visa •• 4242 · Wed, 2 Dec 2026, 10:14 AM</p>
+  </section>
+
+  <section class="card reveal" aria-labelledby="cp-h">
+    <div class="row-between"><h3 id="cp-h">Cancellation</h3><span class="badge">Moderate</span></div>
+    <p class="small mt2">Free cancellation until <b>Thu, 3 Dec, 5:00 PM</b>. After that, no refund.</p>
+    <button class="btn btn--danger btn--block mt3" data-go="g-cancel">Cancel booking</button>
+  </section>
+
+  <p class="center small"><a href="#" class="muted" data-toast="Our support team will contact you within 24 hours" data-toast-icon="ph-lifebuoy"><i class="ph ph-lifebuoy" aria-hidden="true"></i> Report a problem with this booking</a></p>
+</div>
+  <script src="../js/shared/embed.js"></script>
+  <script>if (window.ProtoEmbed) ProtoEmbed.report('g-booking', [['Ref', 'LK-24817'], ['Status', 'Confirmed'], ['Free cancellation', 'Until Thu, 3 Dec, 5:00 PM'], ['Address', 'Full address visible after booking']]);</script>
+  <script src="../js/shared/credits-data.js"></script>
+  <script src="../js/shared/credits-badge.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lokali · Account</title>
+  <script src="../shell.config.js"></script>
+  <script src="../js/shared/lock-guard.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+  <link rel="stylesheet" href="../css/lokali.css">
+  <link rel="stylesheet" href="../css/guest.css">
+  <script src="../js/lokali.js"></script>
+  <script src="../js/art.js"></script>
+  <script src="../js/data.js"></script>
+<style>.acc-group { display: flex; flex-direction: column; gap: 12px; } .acc-group > .card + .card { margin-top: 0 !important; } main > .acc-group + .host-card { margin-top: 4px; } .host-ic { width: 44px; height: 44px; flex: none; display: grid; place-items: center; border-radius: 14px; background: var(--surface); color: var(--accent-ink); font-size: 22px; } .host-card { align-items: center; } .impact-card { align-items: center !important; } .impact-card > .ph-fill { width: 44px !important; height: 44px !important; border-radius: 14px !important; font-size: 22px !important; }</style>
+</head>
+<body class="m">
+<div class="lt-bar" aria-hidden="true">Account</div>
+<header class="lt"><h1>Account</h1></header>
+<main class="pad stack-lg" style="padding-top:8px;padding-bottom:24px">
+  <div class="acc-group">
+  <div class="card profile-card">
+    <img class="avatar lg" data-img="1513097633097-329a3a64e0d4" data-w="160" alt="">
+    <div class="grow"><h2 class="is-h3">Emma Clarke</h2><p class="small muted">Bristol, UK · joined Oct 2026</p></div>
+    <button class="btn btn--secondary btn--sm" data-toast="Edit profile" data-toast-icon="ph-pencil-simple">Edit</button>
+  </div>
+
+  <div class="card card--tint impact-card">
+    <i class="ph-fill ph-leaf" aria-hidden="true"></i>
+    <div class="grow"><b>Your trips gave <span data-count="54" data-prefix="RM ">RM 54</span> back</b><p class="sum-note">To biosphere research from your canopy walk. RM 77 more goes to mangrove replanting after 6 Dec.</p></div>
+  </div>
+
+  </div>
+
+  <a class="card card--accent row host-card" style="gap:16px;color:inherit" href="h-intro.html" data-go="h-intro" id="hostCard">
+    <span class="host-ic"><i class="ph-fill ph-house-line" aria-hidden="true" id="hostIc"></i></span>
+    <div class="grow"><b id="hostT">Become a host</b><p class="small" style="color:var(--accent-ink)" id="hostD">Paid about 24 hours after each experience</p></div>
+    <i class="ph ph-caret-right" aria-hidden="true"></i>
+  </a>
+  <div class="anno" style="margin:0"><b>Suggested (Q13): one Lokali account, two modes.</b> The same sign-in works as a guest and as a host. This card changes with the host application. Preview:
+    <div class="row" style="flex-wrap:wrap;margin-top:8px" id="hostDemo"><button class="chip" data-hs="none">Not a host</button><button class="chip" data-hs="review">In review</button><button class="chip" data-hs="approved">Approved</button></div>
+  </div>
+<script>
+(function () {
+  var S = {
+    none: ['h-intro', 'ph-house-line', 'Become a host', 'Share your place and skills. Get paid about 24 hours after each experience.'],
+    review: ['h-status', 'ph-hourglass-medium', 'Host application in review', 'We reply within 2 working days. View status'],
+    approved: ['h-home', 'ph-arrows-left-right', 'Switch to hosting', 'Listings, bookings and earnings']
+  };
+  function show(k) {
+    var v = S[k] || S.none, c = document.getElementById('hostCard');
+    c.setAttribute('href', v[0] + '.html'); c.setAttribute('data-go', v[0]);
+    document.getElementById('hostIc').className = 'ph-fill ' + v[1];
+    document.getElementById('hostT').textContent = v[2]; document.getElementById('hostD').textContent = v[3];
+    [].forEach.call(document.querySelectorAll('#hostDemo .chip'), function (b) { var on = b.getAttribute('data-hs') === k; b.classList.toggle('active', on); b.setAttribute('aria-pressed', on); });
+  }
+  document.getElementById('hostDemo').addEventListener('click', function (e) { var b = e.target.closest('[data-hs]'); if (!b) return; L.state.set('hostStatus', b.getAttribute('data-hs')); show(b.getAttribute('data-hs')); });
+  show(L.state.get('hostStatus', 'none'));
+})();
+</script>
+
+  <div>
+    <div class="list-label" style="padding-left:4px">Settings</div>
+    <div class="list">
+      <div class="list-row"><i class="ph ph-user" aria-hidden="true"></i><div class="list-row__text">Personal info<small>Name, phone, emergency contact</small></div><i class="ph ph-caret-right chev" aria-hidden="true"></i></div>
+      <div class="list-row"><i class="ph ph-key" aria-hidden="true"></i><div class="list-row__text">Sign-in &amp; security<small>Google connected · password set</small></div><i class="ph ph-caret-right chev" aria-hidden="true"></i></div>
+      <div class="list-row"><i class="ph ph-credit-card" aria-hidden="true"></i><div class="list-row__text">Payment methods<small>Visa •• 4242</small></div><i class="ph ph-caret-right chev" aria-hidden="true"></i></div>
+      <div class="list-row"><i class="ph ph-currency-circle-dollar" aria-hidden="true"></i><div class="list-row__text">Show approximate prices in<small>GBP (charged in MYR)</small></div><i class="ph ph-caret-right chev" aria-hidden="true"></i></div>
+      <div class="list-row"><i class="ph ph-bell" aria-hidden="true"></i><div class="list-row__text">Email reminders<small>Before each experience</small></div><button class="switch" role="switch" aria-checked="true" aria-label="Email reminders"></button></div>
+      <div class="list-row"><i class="ph ph-megaphone" aria-hidden="true"></i><div class="list-row__text">News and offers<small>Occasional emails</small></div><button class="switch" role="switch" aria-checked="false" aria-label="News and offers"></button></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="list-label" style="padding-left:4px">Help</div>
+    <div class="list">
+      <div class="list-row"><i class="ph ph-question" aria-hidden="true"></i><div class="list-row__text">Help &amp; FAQs</div><i class="ph ph-caret-right chev" aria-hidden="true"></i></div>
+      <div class="list-row"><i class="ph ph-lifebuoy" aria-hidden="true"></i><div class="list-row__text">Contact support</div><i class="ph ph-caret-right chev" aria-hidden="true"></i></div>
+      <div class="list-row" data-go="g-corporate"><i class="ph ph-buildings" aria-hidden="true"></i><div class="list-row__text">Book for a company</div><i class="ph ph-caret-right chev" aria-hidden="true"></i></div>
+      <div class="list-row"><i class="ph ph-file-text" aria-hidden="true"></i><div class="list-row__text">Terms &amp; privacy notice</div><i class="ph ph-caret-right chev" aria-hidden="true"></i></div>
+    </div>
+  </div>
+
+  <div class="list">
+    <div class="list-row" data-toast="Your data file will be emailed to you" data-toast-icon="ph-download-simple"><i class="ph ph-download-simple" aria-hidden="true"></i><div class="list-row__text">Download my data</div></div>
+    <div class="list-row" data-go="g-home"><i class="ph ph-sign-out" aria-hidden="true"></i><div class="list-row__text">Sign out</div></div>
+    <div class="list-row" data-open="#del" style="color:var(--danger)"><i class="ph ph-trash" aria-hidden="true" style="color:var(--danger)"></i><div class="list-row__text">Delete account</div></div>
+  </div>
+  <p class="center xs muted">Lokali by The Habitat Group · v1.0</p>
+</main>
+
+<div class="sheet" id="del" role="dialog" aria-labelledby="del-h">
+  <h3 id="del-h">Delete account?</h3>
+  <p class="small muted mt2">This permanently deletes your profile, messages and reviews. Booking records are kept for 7 years for tax, as the law requires.</p>
+  <div class="notice notice--warn mt3"><i class="ph ph-warning" aria-hidden="true"></i><span>2 upcoming bookings · cancel them first, or each listing's policy applies</span></div>
+  <button class="btn btn--block mt4" style="background:var(--danger);color:#fff" data-close data-toast="Account deletion requested" data-toast-icon="ph-trash">Delete account</button>
+  <button class="btn btn--ghost btn--block mt2" data-close>Keep my account</button>
+</div>
+<nav class="tabbar" data-tabs="guest" data-active="g-account"></nav>
+  <script>
+  (function () { /* compact title appears once the large title scrolls away */
+var bar = document.querySelector('.lt-bar'), h = document.querySelector('.lt h1');
+function f() { bar.classList.toggle('on', h.getBoundingClientRect().bottom < bar.offsetHeight); }
+addEventListener('scroll', f, { passive: true }); f();
+  })();
+  </script>
+  <script src="../js/shared/embed.js"></script>
+  <script>if (window.ProtoEmbed) ProtoEmbed.report('g-account', [['Signed in', 'Emma Clarke · Google'], ['PDPA', 'Download data · Delete account']]);</script>
+  <script src="../js/shared/credits-data.js"></script>
+  <script src="../js/shared/credits-badge.js"></script>
+</body>
+</html>

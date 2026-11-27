@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lokali · Reviews</title>
+  <script src="../shell.config.js"></script>
+  <script src="../js/shared/lock-guard.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+  <link rel="stylesheet" href="../css/lokali.css">
+  <link rel="stylesheet" href="../css/guest.css">
+  <script src="../js/lokali.js"></script>
+  <script src="../js/art.js"></script>
+  <script src="../js/data.js"></script>
+  <style>
+    .rs { display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center; padding: 8px 16px 16px; }
+    .rs-score b { display: block; font: 700 34px/41px var(--font-display); color: var(--ink); }
+    .rs-score .stars { display: flex; gap: 2px; color: #C9A21C; font-size: 14px; margin-top: 2px; }
+    .rs-score small { display: block; font-size: 13px; line-height: 18px; color: var(--muted); margin-top: 4px; }
+    .rs-bars { display: grid; grid-template-columns: 12px 1fr 28px; gap: 6px 8px; align-items: center; font-size: 12px; line-height: 16px; color: var(--muted); }
+    .rs-bars .t { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; } .rs-bars .t i { display: block; height: 100%; background: var(--primary); border-radius: 3px; }
+    .rs-bars span:last-child, .rs-bars .n { text-align: right; }
+    .rv-tools { padding: 0 16px 8px; }
+    .rv-chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 12px -16px 0; padding: 0 16px; }
+    .rv-chips::-webkit-scrollbar { display: none; }
+    .rvl { padding: 0 16px 32px; }
+    .rvi { padding: 16px 0; border-top: 1px solid var(--line); }
+    .rvi-head { display: grid; grid-template-columns: 40px 1fr auto; gap: 12px; align-items: center; }
+    .rvi-head img, .rvi-head .ini { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+    .rvi-head .ini { display: grid; place-items: center; background: var(--primary-tint); color: var(--primary); font-weight: 700; font-size: 15px; }
+    .rvi-head b { display: block; font-size: 17px; line-height: 22px; font-weight: 600; } .rvi-head small { display: block; font-size: 13px; line-height: 18px; color: var(--muted); }
+    .rvi-stars { display: flex; gap: 2px; color: #C9A21C; font-size: 13px; }
+    .rvi p { margin-top: 10px; font-size: 17px; line-height: 22px; }
+    .rvi-photos { display: flex; gap: 8px; margin-top: 10px; } .rvi-photos img { width: 72px; height: 72px; border-radius: 12px; object-fit: cover; }
+    .rvi-reply { margin-top: 12px; padding: 12px 14px; border-radius: 14px; background: var(--surface); font-size: 15px; line-height: 20px; }
+    .rvi-reply b { display: block; font-size: 13px; line-height: 18px; color: var(--muted); font-weight: 600; margin-bottom: 2px; }
+    .rv-empty { padding: 32px 0; text-align: center; color: var(--muted); }
+    .rv-more { width: 100%; margin-top: 8px; }
+    /* aligned with the experience page review summary (27 Nov) */
+    .rv-for { display: flex; align-items: center; gap: 6px; padding: 4px 16px 12px; font-size: 13px; line-height: 18px; color: var(--muted); }
+    .rv-for .ph-fill { color: var(--primary); font-size: 16px; }
+    .rs { gap: 24px; padding: 0 16px 20px; }
+    .rs-score { text-align: center; }
+    .rs-score b { font-size: 44px !important; line-height: 48px !important; font-weight: 700 !important; letter-spacing: -.02em; }
+    .rs-score .stars { justify-content: center; color: var(--accent) !important; font-size: 15px; margin-top: 4px; }
+    .rs-bars { grid-template-columns: 24px 1fr 28px !important; gap: 8px 10px !important; }
+    .rs-bars .lbl { display: inline-flex; align-items: center; justify-content: flex-end; gap: 2px; } .rs-bars .lbl .ph-fill { font-size: 10px; color: var(--faint); }
+    .rs-bars .t { height: 8px !important; border-radius: 4px !important; background: var(--sand) !important; }
+    .rs-bars .t i { background: var(--accent) !important; border-radius: 4px !important; }
+    .rvi-head { grid-template-columns: 44px 1fr auto !important; }
+    .rvi-head img, .rvi-head .ini { width: 44px !important; height: 44px !important; }
+    .rvi-head .ini { background: var(--primary) !important; color: #fff !important; font-size: 18px !important; font-weight: 600 !important; }
+    .rvi-head b { font-size: 15px !important; line-height: 20px !important; }
+    .rvi-head small { font-size: 13px !important; line-height: 18px !important; }
+    .rvi-stars { color: var(--accent) !important; }
+    .rvi p { font-size: 15px !important; line-height: 20px !important; }
+    .rvi-reply { border-radius: 14px; font-size: 14px !important; line-height: 20px !important; }
+    .rv-more { width: 100%; margin-top: 12px; min-height: 48px; border: 1.5px solid var(--primary) !important; background: transparent !important; color: var(--primary) !important; border-radius: var(--r); font-weight: 600; }
+    .rv-row { display: flex; align-items: center; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px 4px; }
+    .rv-row::-webkit-scrollbar { display: none; }
+    .rv-sort, .rv-chip { flex: none; display: inline-flex; align-items: center; gap: 4px; min-height: 40px; padding: 0 14px; border-radius: 999px; font-size: 14px; font-weight: 600; white-space: nowrap; cursor: pointer; }
+    .rv-sort { border: 0; background: var(--ink); color: #fff; } .rv-sort .ph { font-size: 14px; }
+    .rv-chip { border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 500; }
+    .rv-chip[aria-pressed="true"] { border-color: var(--primary); background: var(--primary-tint); color: var(--primary-strong); font-weight: 600; }
+    .rv-sep { flex: none; width: 1px; height: 24px; background: var(--line); }
+    .rv-opts button { width: 100%; display: flex; align-items: center; justify-content: space-between; min-height: 52px; padding: 0; border: 0; border-bottom: 1px solid var(--line); background: none; font-size: 16px; color: var(--ink); text-align: left; cursor: pointer; }
+    .rv-opts button:last-child { border-bottom: 0; }
+    .rv-opts .ph { font-size: 20px; color: var(--primary); visibility: hidden; }
+    .rv-opts [aria-checked="true"] { font-weight: 600; } .rv-opts [aria-checked="true"] .ph { visibility: visible; }
+    #sh-sort .rv-opts { margin-top: 8px; padding-bottom: 8px; }
+  </style>
+</head>
+<body class="m">
+<header class="appbar appbar--flow">
+  <button class="icon-btn" data-go="g-listing" aria-label="Back"><i class="ph ph-caret-left" aria-hidden="true"></i></button>
+  <h1 class="appbar__title">Reviews</h1>
+  <span class="spacer"></span>
+</header>
+
+<section class="rs" aria-label="Rating summary">
+  <div class="rs-score"><b>4.96</b><span class="stars" aria-label="4.96 out of 5"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></span><small>128 reviews</small></div>
+  <div class="rs-bars" aria-hidden="true">
+    <span class="lbl">5<i class="ph-fill ph-star" aria-hidden="true"></i></span><span class="t"><i style="width:97%"></i></span><span class="n">124</span>
+    <span class="lbl">4<i class="ph-fill ph-star" aria-hidden="true"></i></span><span class="t"><i style="width:2.3%"></i></span><span class="n">3</span>
+    <span class="lbl">3<i class="ph-fill ph-star" aria-hidden="true"></i></span><span class="t"><i style="width:.8%"></i></span><span class="n">1</span>
+    <span class="lbl">2<i class="ph-fill ph-star" aria-hidden="true"></i></span><span class="t"><i style="width:0"></i></span><span class="n">0</span>
+    <span class="lbl">1<i class="ph-fill ph-star" aria-hidden="true"></i></span><span class="t"><i style="width:0"></i></span><span class="n">0</span>
+  </div>
+</section>
+
+<div class="rv-tools">
+  <div class="rv-row" id="filt">
+    <button class="rv-sort" data-open="#sh-sort" aria-haspopup="dialog"><span id="sortLbl">Newest</span><i class="ph ph-caret-down" aria-hidden="true"></i></button>
+    <span class="rv-sep" aria-hidden="true"></span>
+    <button class="rv-chip" aria-pressed="false" data-f="photos">With photos</button>
+    <button class="rv-chip" aria-pressed="false" data-f="kids">With children</button>
+    <button class="rv-chip" aria-pressed="false" data-f="reply">Host replied</button>
+  </div>
+</div>
+
+
+<main class="rvl" id="list" aria-live="polite"></main>
+
+<div class="sheet" id="sh-sort" role="dialog" aria-labelledby="ss-h" hidden>
+  <h3 id="ss-h" class="sheet-title">Sort reviews</h3>
+  <div class="rv-opts" id="sort" role="radiogroup" aria-label="Sort reviews">
+    <button role="radio" aria-checked="true" data-s="new" data-l="Newest">Newest first<i class="ph ph-check" aria-hidden="true"></i></button>
+    <button role="radio" aria-checked="false" data-s="high" data-l="Highest">Highest rated<i class="ph ph-check" aria-hidden="true"></i></button>
+    <button role="radio" aria-checked="false" data-s="low" data-l="Lowest">Lowest rated<i class="ph ph-check" aria-hidden="true"></i></button>
+  </div>
+</div>
+<script>
+(function () {
+  var R = [
+    { n: 'Daniel', from: 'Singapore', when: 'Nov 2026', d: 30, s: 5, t: 'Silent paddling under thousands of blinking lights. My kids still talk about it. Pak Rahim\'s wife\'s kuih were the best we had in Malaysia.', img: '1701980889802-55ff39e2e973', photos: ['1784751449882-c2c28ca2dd78', '1646513378626-23493fccf7c9'], kids: true, reply: 'Terima kasih Daniel! Come back in the dry season, the fireflies are even brighter.' },
+    { n: 'Olivia', from: 'London', when: 'Nov 2026', d: 25, s: 5, t: 'A silent paddle, no engine, just the water and the fireflies. Unforgettable.' },
+    { n: 'Aisyah', from: 'Shah Alam', when: 'Oct 2026', d: 19, s: 4, t: 'Lovely, calm trip. Bring long sleeves, the mosquitoes are serious after 7 PM.', img: '1600481176431-47ad2ab2745d' },
+    { n: 'Wei Ming', from: 'Penang', when: 'Nov 2026', d: 20, s: 5, t: 'Easy for our parents too. Life jackets for everyone and a calm boat.', kids: true },
+    { n: 'Ahmad Faiz', from: 'Kuala Lumpur', when: 'Oct 2026', d: 18, s: 4, t: 'Beautiful night. I only wish we had more time with the fireflies.', reply: 'Thank you Ahmad! On quiet nights we now stay 15 minutes longer.' },
+    { n: 'Sophie', from: 'Paris', when: 'Oct 2026', d: 15, s: 5, t: 'Pak Rahim knows every bend of the river. The kuih at his home was a lovely start.', photos: ['1786717667687-2f05e422d6f9'] },
+    { n: 'Chloe Davies', from: 'Sydney', when: 'Sep 2026', d: 10, s: 5, t: 'Booked for a birthday. Worth every ringgit, and good to know where the money goes.', reply: 'Selamat hari jadi, Chloe! Thank you for coming.' },
+    { n: 'Marcus', from: 'Berlin', when: 'Aug 2026', d: 6, s: 3, t: 'Lovely host. It rained on our night so we saw fewer fireflies, but he warned us the day before.', reply: 'Sorry about the rain, Marcus. Message me anytime to rebook for free.' },
+    { n: 'Hana', from: 'Tokyo', when: 'Aug 2026', d: 4, s: 5, t: 'Quiet, respectful and magical. Thank you for protecting this place.', photos: ['1589556183130-530470785fab'] }
+  ];
+  var sort = 'new', f = {}, shown = Infinity;
+  function stars(s) { var h = ''; for (var k = 0; k < 5; k++) h += '<i class="' + (k < s ? 'ph-fill' : 'ph') + ' ph-star" aria-hidden="true"></i>'; return '<span class="rvi-stars" aria-label="' + s + ' out of 5 stars">' + h + '</span>'; }
+  function draw() {
+    var list = R.filter(function (r) { return (!f.photos || r.photos) && (!f.kids || r.kids) && (!f.reply || r.reply); });
+    list.sort(function (a, b) { return sort === 'high' ? b.s - a.s || b.d - a.d : sort === 'low' ? a.s - b.s || b.d - a.d : b.d - a.d; });
+    var total = list.length, h = list.slice(0, shown).map(function (r) {
+      return '<article class="rvi"><div class="rvi-head">' + (r.img ? '<img src="' + L.img(r.img, 100) + '" alt="">' : '<span class="ini" aria-hidden="true">' + r.n[0] + '</span>') + '<div><b>' + r.n + '</b><small>' + r.from + ' · ' + r.when + '</small></div>' + stars(r.s) + '</div>' +
+        '<p>' + r.t + '</p>' + (r.photos ? '<div class="rvi-photos">' + r.photos.map(function (p) { return '<img src="' + L.img(p, 200) + '" alt="Guest photo">'; }).join('') + '</div>' : '') +
+        (r.reply ? '<div class="rvi-reply"><b>Reply from Pak Rahim</b>' + r.reply + '</div>' : '') + '</article>';
+    }).join('');
+    if (!total) h = '<p class="rv-empty">No reviews match. <button class="btn btn--sm btn--secondary" id="clr">Clear filters</button></p>';
+    var m = document.getElementById('list'); m.innerHTML = h;
+    var c = document.getElementById('clr'); if (c) c.onclick = function () { f = {}; document.querySelectorAll('#filt .rv-chip').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); }); draw(); };
+    var mo = document.getElementById('more'); if (mo) mo.onclick = function () { shown += 6; draw(); };
+  }
+  document.getElementById('sort').addEventListener('click', function (e) { var b = e.target.closest('[data-s]'); if (!b) return; this.querySelectorAll('[data-s]').forEach(function (x) { x.setAttribute('aria-checked', x === b); }); sort = b.dataset.s; document.getElementById('sortLbl').textContent = b.dataset.l; L.close(); draw(); });
+  document.getElementById('filt').addEventListener('click', function (e) { var b = e.target.closest('[data-f]'); if (!b) return; var on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', on); f[b.dataset.f] = on; draw(); });
+  draw();
+})();
+</script>
+  <script src="../js/shared/embed.js"></script>
+  <script>if (window.ProtoEmbed) ProtoEmbed.report('g-reviews', [['Opens from', 'Experience page › Show all 128 reviews'], ['Sort', 'Newest, highest, lowest'], ['Filters', 'With photos, with children, host replied']]);</script>
+  <script src="../js/shared/credits-data.js"></script>
+  <script src="../js/shared/credits-badge.js"></script>
+</body>
+</html>

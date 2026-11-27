@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lokali · Home</title>
+  <script src="../shell.config.js"></script>
+  <script src="../js/shared/lock-guard.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+  <link rel="stylesheet" href="../css/lokali.css">
+  <script src="../js/lokali.js"></script>
+  <script src="../js/art.js"></script>
+  <script src="../js/data.js"></script>
+  <style>
+    .hero { padding: calc(var(--sb) + 4px) 16px 56px; display: flex; flex-direction: column; }
+    .hero .top { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; }
+    .hero .wordmark { color: #fff; } .hero .wordmark .ph-fill { color: var(--accent); }
+    .hero::after { content: ""; position: absolute; inset: 40% 0 0; background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--deep) 92%, transparent) 55%); }
+    .hero .copy { position: relative; z-index: 1; margin-top: 16px; }
+    .hero .moon { display: none; }
+    .hero .kicker { color: var(--accent); }
+    body.m .hero .display { margin-top: 0; font-size: 28px; line-height: 32px; text-align: left; font-family: var(--font-display); }
+    .hero p { color: rgba(255,255,255,.82); margin-top: 12px; max-width: 290px; }
+    .search-wrap { padding: 0 16px; margin-top: -32px; position: relative; z-index: 3; }
+    .search-pill .go { margin-left: auto; width: 44px; height: 44px; border-radius: 50%; background: var(--deep); color: var(--accent); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+    .search-pill .go .ph { font-size: 20px; vertical-align: 0; }
+    .search-pill > .itile { background: var(--primary-tint); }
+    .impact-head { display: flex; align-items: center; justify-content: space-between; padding: 0 16px 12px; }
+    .live { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--muted); }
+    .live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 4px var(--success-tint); }
+    .cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px; }
+    .cat3 { position: relative; display: block; aspect-ratio: 1 / 1; border-radius: 20px; overflow: hidden; background: var(--sand); box-shadow: 0 6px 18px rgba(16, 26, 20, .12); }
+    .cat3 img { width: 100%; height: 100%; object-fit: cover; }
+    .cat3::after { content: ""; position: absolute; inset: 40% 0 0; background: linear-gradient(180deg, transparent, rgba(10, 18, 14, .7)); }
+    .cat3__over { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+    .cat3 .exp-card__tag { max-width: 100%; white-space: nowrap; font-size: 11px; padding: 8px 10px; gap: 4px; border-radius: 0 14px 0 20px; }
+    .cat3 .exp-card__tag .ph { font-size: 14px; }
+    .cat3 .exp-card__tag .ph { flex: none; }
+    .cat3__n { padding: 0 12px; color: #fff; font-size: 12px; line-height: 16px; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,.4); }
+    .cat2 { display: block; border-radius: 20px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); color: var(--ink); }
+    .cat2 .spot { border-radius: 0; aspect-ratio: 16 / 9; }
+    .cat2 div.t { padding: 12px 12px 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .cat2 b { font-size: 15px; line-height: 20px; } .cat2 small { color: var(--muted); font-size: 12px; white-space: nowrap; }
+    .feature .exp-card { width: 270px; } .feature .exp-card__img { aspect-ratio: 4 / 3.6; }
+    .how { margin: 0 16px; padding: 20px 16px 4px; border-radius: 24px; background: var(--surface); border: 1px solid var(--line); }
+    .how :is(h3, .is-h3) { margin-bottom: 16px; }
+    .how li b { display: block; font-size: 15px; } .how li span { font-size: 13px; color: var(--muted); line-height: 18px; }
+    .corp { margin: 0 16px; border-radius: 24px; padding: 24px 20px; background-color: var(--deep); color: #fff; display: flex; gap: 16px; align-items: center; cursor: pointer; }
+    .corp :is(h3, .is-h3) { color: #fff; } .corp p { color: rgba(255,255,255,.78); font-size: 13px; line-height: 18px; margin-top: 4px; }
+    .corp .go { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: var(--deep); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+    .host { margin: 0 16px; display: flex; gap: 16px; align-items: center; padding: 16px; border-radius: 24px; background: var(--accent-tint); }
+    .host :is(h4, .is-h4) { color: var(--accent-ink); } .host p { color: var(--accent-ink); opacity: .85; font-size: 13px; line-height: 18px; }
+  </style>
+</head>
+<body class="m">
+  <header class="hero hero-deep">
+    <div class="art" data-art="nightRiver"></div>
+    <div class="top">
+      <span class="wordmark"><i class="ph-fill ph-leaf" aria-hidden="true"></i>lokali</span>
+      <button class="icon-btn itile glass" aria-label="Notifications" data-toast="No new notifications" data-toast-icon="ph-bell"><i class="ph ph-bell" aria-hidden="true"></i></button>
+    </div>
+    <div class="copy">
+      <h1 class="display">Sustainable experiences that give <span class="hl">back.</span></h1>
+    </div>
+  </header>
+
+  <div class="search-wrap">
+    <a class="search-pill" href="g-search.html" data-go="g-search" aria-label="Search experiences">
+      <span><b>Where to?</b><small>Anywhere · Any week · Add guests</small></span>
+      <span class="go" aria-hidden="true"><i class="ph ph-magnifying-glass"></i></span>
+    </a>
+  </div>
+
+  <section class="section reveal" aria-labelledby="imp-h">
+    <div class="impact-head"><h2 class="is-h3" id="imp-h">Impact so far</h2><span class="live">Updated today</span></div>
+    <div class="impact-row pad">
+      <div class="impact g"><span class="itile"><i class="ph ph-hand-coins" aria-hidden="true"></i></span><b data-count="412800" data-prefix="RM ">RM 412,800</b><span>paid to local hosts and communities</span></div>
+      <div class="impact y"><span class="itile"><i class="ph ph-plant" aria-hidden="true"></i></span><b data-count="8240">8,240</b><span>mangroves and trees replanted</span></div>
+    </div>
+  </section>
+
+  <section class="section reveal" aria-labelledby="feat-h">
+    <div class="section-head"><h2 id="feat-h">Featured this month</h2><a href="g-results.html" data-go="g-results">See all</a></div>
+    <div class="hscroll feature" id="featured"></div>
+  </section>
+
+  <section class="section reveal" aria-labelledby="cat-h">
+    <div class="section-head"><h2 id="cat-h">Explore by category</h2></div>
+    <div class="cat-grid" id="cats"></div>
+  </section>
+
+  <section class="section reveal">
+    <div class="how">
+      <h3>Where a booking goes</h3>
+      <ol class="trail">
+        <li><span class="itile"><i class="ph ph-ticket" aria-hidden="true"></i></span><div><b>Book and pay in MYR</b><span>Card, FPX or e-wallet. Confirmed instantly.</span></div></li>
+        <li><span class="itile accent"><i class="ph ph-house-line" aria-hidden="true"></i></span><div><b>Most of it stays local</b><span>The host keeps the biggest share, paid about 24 h after the experience.</span></div></li>
+        <li><span class="itile dark"><i class="ph-fill ph-leaf" aria-hidden="true"></i></span><div><b>Part of every ticket helps the place</b><span>Up to 25%, for replanting, reefs, rangers or crafts. Each listing shows its split.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section reveal" aria-labelledby="near-h">
+    <div class="section-head"><h2 id="near-h">More to explore</h2><a href="g-results.html" data-go="g-results">See all</a></div>
+    <div class="hscroll" id="near"></div>
+  </section>
+
+  <section class="section reveal">
+    <a class="corp bg-batik" href="g-corporate.html" data-go="g-corporate">
+      <div class="grow"><span class="kicker" style="color:var(--accent)">For companies</span><h3 class="mt1">Team days that give back</h3><p>Group size, dates and budget. A custom quote within 2 working days.</p></div>
+      <span class="go" aria-hidden="true"><i class="ph ph-arrow-right" style="font-size: 20px;vertical-align:0"></i></span>
+    </a>
+  </section>
+
+  <section class="section reveal" style="padding-bottom: 8px">
+    <div class="host">
+      <span class="itile lg" style="background:var(--surface);color:var(--accent-ink)"><i class="ph ph-house-line" aria-hidden="true"></i></span>
+      <div class="grow"><h4>Host on Lokali</h4><p>List experiences in your area. Paid about 24 hours after each one.</p></div>
+      <button class="btn btn--sm" style="background:var(--deep);color:#fff" data-go="h-intro">Start</button>
+    </div>
+  </section>
+
+  <nav class="tabbar" data-tabs="guest" data-active="g-home"></nav>
+
+  <script>
+  (function () {
+    var spots = { nature: 'nature', culture: 'culture', farm: 'farm', retreat: 'retreat' };
+    document.getElementById('cats').innerHTML = L.cats.map(function (c) {
+      var ph = { nature: 'canopy', culture: 'batik', farm: 'paddy', retreat: 'retreat' }[c.key];
+      return '<a class="cat3" href="g-results.html" data-go="g-results" aria-label="' + c.name + ', ' + c.count + ' experiences"><img src="' + L.img(L.exp[ph].img, 500) + '" alt="" loading="lazy">' +
+        '<span class="cat3__over"><span class="cat3__n">' + c.count + ' experiences</span><span class="exp-card__tag"><i class="ph ' + c.icon + '" aria-hidden="true"></i>' + c.name + '</span></span></a>';
+    }).join('');
+    document.getElementById('featured').innerHTML = ['mangrove', 'orangutan', 'nyonya', 'reef', 'batik'].map(function (k) { return L.cardHTML(k); }).join('');
+    document.getElementById('near').innerHTML = ['paddy', 'canopy', 'weaving', 'retreat'].map(function (k) { return L.cardHTML(k); }).join('');
+  })();
+  </script>
+  <script src="../js/shared/embed.js"></script>
+  <script>if (window.ProtoEmbed) ProtoEmbed.report('g-home', [['Focus', 'Hero message: travel that gives back'], ['Signed in', 'No (browsing is open)'], ['Impact', 'Live counters'], ['Categories', '4, from admin › Content']]);</script>
+  <script src="../js/shared/credits-data.js"></script>
+  <script src="../js/shared/credits-badge.js"></script>
+</body>
+</html>
