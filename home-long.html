@@ -1,0 +1,16 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Lokali · Home, full length</title>
+<style>*{box-sizing:border-box;margin:0}body{font:400 14px/20px Inter,system-ui,sans-serif;color:#222;background:#F3F3F1;padding:24px}
+.wrap{display:flex;gap:40px;justify-content:center;align-items:flex-start}.col b{display:block;margin-bottom:8px;font-size:14px}
+.ph{width:402px;border-radius:32px;overflow:hidden;background:#fff;box-shadow:0 12px 40px rgba(0,0,0,.12)}iframe{display:block;width:402px;height:900px;border:0}</style></head>
+<body><div class="wrap">
+<div class="col"><b>Hers (Lokali latest)</b><div class="ph"><iframe id="a" src="pages/g-home.html"></iframe></div></div>
+<div class="col"><b>Ours (0.20.1)</b><div class="ph"><iframe id="b" src="ours/pages/g-home.html"></iframe></div></div>
+</div>
+<script>
+['a','b'].forEach(function(id){var f=document.getElementById(id);f.addEventListener('load',function(){
+  var d=f.contentDocument;d.documentElement.classList.add('in-phone');
+  function fit(){d.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in','is-in','shown')});
+    var t=d.querySelector('.tabbar');d.body.style.position='relative';if(t){t.style.position='absolute';t.style.bottom='16px';}
+    f.style.height=d.documentElement.scrollHeight+'px';}
+  setTimeout(fit,800);setTimeout(fit,2500);});});
+</script></body></html>
