@@ -1,0 +1,25 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Lokali · Her updates vs Airy now</title>
+<style>*{box-sizing:border-box;margin:0}body{font:400 14px/20px Inter,system-ui,sans-serif;color:#222;background:#F3F3F1;padding:24px}
+h1{font-size:18px}.sub{color:#6A6A6A;margin:4px 0 20px}
+.row{display:grid;grid-template-columns:200px 260px 260px;gap:20px;align-items:start;margin-bottom:28px}
+.row h2{font-size:15px}.row p{font-size:12px;line-height:17px;color:#6A6A6A;margin-top:4px}.row .req{color:#2F5D3A;font-weight:600}
+.cell b{display:block;font-size:12px;margin-bottom:6px}.frame{width:260px;height:565px;border-radius:26px;overflow:hidden;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.10)}
+.frame iframe{width:402px;height:874px;border:0;transform:scale(.6468);transform-origin:0 0}</style></head><body>
+<h1>Her updates (Canopy) vs Airy as it is now</h1><p class="sub">Left: her screen showing the update. Right: ours today. Each phone scrolls.</p><div id="rows"></div>
+<script>
+sessionStorage.setItem('lokali:book', JSON.stringify({adults:4,children:0,priv:true,subtotal:980,day:12,time:'7:30 AM'}));
+sessionStorage.setItem('lk-private','1'); sessionStorage.setItem('lk-corp-exp','mangrove');
+var R=[
+ ['1 · Booking choice carries through','Chose: Sat 12 Dec, 7:30 AM, private boat for 4. Hers shows it at checkout; ours always shows Sun 6 Dec, 2 adults 1 child.','Must: Book + price summary before paying','g-checkout','g-checkout'],
+ ['2 · Private boat: only free dates','Hers greys out dates that already have guests when you book the whole boat.','Must: private option, auto-close when full','g-book','g-book'],
+ ['3 · Company form pre-filled','Coming from the listing, hers shows the experience already picked.','Must: corporate enquiry + listing section 18','g-corporate','g-corporate'],
+ ['4 · Listing rules in sheets','What to bring, Etiquette, Food, Accessibility as tidy rows that open a sheet.','Must: listing sections 11–14','g-listing#s11','g-listing#s11'],
+ ['5 · Host profile screen','New page from Meet your guide: video, stats, quote, Q&A. Ours keeps it inside the listing.','Not in brief (suggestion); trust goal','g-host','g-listing#s6'],
+ ['6 · Reply time','Hers: "replies within an hour" (matches her host profile). Ours: "within a day".','Not in brief; must be consistent','g-chat','g-chat']
+];
+document.getElementById('rows').innerHTML=R.map(function(r,i){return '<div class="row"><div><h2>'+r[0]+'</h2><p>'+r[1]+'</p><p class="req">'+r[2]+'</p></div>'+
+ '<div class="cell"><b>Hers</b><div class="frame"><iframe data-u="pages/'+r[3]+'"></iframe></div></div>'+
+ '<div class="cell"><b>Airy now</b><div class="frame"><iframe data-u="ours/pages/'+r[4]+'"></iframe></div></div></div>';}).join('');
+document.querySelectorAll('iframe').forEach(function(f){var u=f.dataset.u.split('#');f.addEventListener('load',function(){try{var d=f.contentDocument;d.documentElement.classList.add('in-phone');
+  d.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')});if(u[1]){setTimeout(function(){var el=d.getElementById(u[1]);if(el)f.contentWindow.scrollTo(0,el.getBoundingClientRect().top+f.contentWindow.scrollY-70);},900);}}catch(e){}});f.src=u[0]+'.html';});
+</script></body></html>

@@ -93,11 +93,11 @@
 </main>
 
 <div class="sheet" id="del" role="dialog" aria-labelledby="del-h">
-  <h3 id="del-h">Delete account?</h3>
+  <h3 id="del-h" class="sheet-title">Delete account?</h3>
   <p class="small muted mt2">This permanently deletes your profile, messages and reviews. Booking records are kept for 7 years for tax, as the law requires.</p>
   <div class="notice notice--warn mt3"><i class="ph ph-warning" aria-hidden="true"></i><span>2 upcoming bookings · cancel them first, or each listing's policy applies</span></div>
-  <button class="btn btn--block mt4" style="background:var(--danger);color:#fff" data-close data-toast="Account deletion requested" data-toast-icon="ph-trash">Delete account</button>
-  <button class="btn btn--ghost btn--block mt2" data-close>Keep my account</button>
+  <div class="sheet-foot"><button class="btn btn--block" style="background:var(--danger);color:#fff" data-close data-toast="Account deletion requested" data-toast-icon="ph-trash">Delete account</button>
+    <button class="btn btn--ghost btn--block" data-close>Keep my account</button></div>
 </div>
 <nav class="tabbar" data-tabs="guest" data-active="g-account"></nav>
   <script>

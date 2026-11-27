@@ -83,25 +83,25 @@
 </div>
 
 <div class="sheet" id="sh-date" role="dialog" aria-labelledby="sd-h" hidden>
-  <h3 id="sd-h">When</h3>
+  <h3 id="sd-h" class="sheet-title">When</h3>
   <div class="chips wrap mt2" id="dq"><button class="chip chip--soft" data-v="Any week">Any week</button><button class="chip chip--soft" data-v="This weekend">This weekend</button></div>
   <div class="cal-head mt3"><button class="icon-btn" aria-label="Previous month"><i class="ph ph-caret-left" aria-hidden="true"></i></button><b>December 2026</b><button class="icon-btn" aria-label="Next month"><i class="ph ph-caret-right" aria-hidden="true"></i></button></div>
   <div class="cal" id="cal"></div>
-  <div class="sh-foot"><button class="btn btn--ghost" id="d-clr">Clear</button><button class="btn btn--primary" id="d-ok" data-close>Done</button></div>
+  <div class="sheet-foot row-2"><button class="btn btn--ghost" id="d-clr">Clear</button><button class="btn btn--primary" id="d-ok" data-close>Done</button></div>
 </div>
 
 <div class="sheet" id="sh-who" role="dialog" aria-labelledby="sw-h" hidden>
-  <h3 id="sw-h">Who</h3>
+  <h3 id="sw-h" class="sheet-title">Who</h3>
   <div class="guest-row"><div><b>Adults</b><small>Age 13+</small></div>
     <div class="stepper" data-stepper data-min="1" data-max="15" id="st-a"><button data-dec aria-label="Fewer adults"><i class="ph ph-minus" aria-hidden="true"></i></button><output>2</output><button data-inc aria-label="More adults"><i class="ph ph-plus" aria-hidden="true"></i></button></div></div>
   <div class="guest-row"><div><b>Children</b><small>Age 5–12</small></div>
     <div class="stepper" data-stepper data-min="0" data-max="10" id="st-c"><button data-dec aria-label="Fewer children"><i class="ph ph-minus" aria-hidden="true"></i></button><output>1</output><button data-inc aria-label="More children"><i class="ph ph-plus" aria-hidden="true"></i></button></div></div>
   <p class="hint mt2">Groups of 11 or more: <a href="g-corporate.html" data-go="g-corporate">send a group enquiry</a></p>
-  <div class="sh-foot"><button class="btn btn--primary" data-close>Done</button></div>
+  <div class="sheet-foot"><button class="btn btn--primary" data-close>Done</button></div>
 </div>
 
 <div class="sheet" id="sh-price" role="dialog" aria-labelledby="sp-h" hidden>
-  <div class="row-between" style="align-items:baseline;gap:12px"><h3 id="sp-h">Price per adult</h3><span class="p-out" id="p-out">RM 0 – RM 500+</span></div>
+  <div class="row-between" style="align-items:baseline;gap:12px"><h3 id="sp-h" class="sheet-title">Price per adult</h3><span class="p-out" id="p-out">RM 0 – RM 500+</span></div>
   <div class="histo" aria-hidden="true" id="histo"></div>
   <div class="dual"><span class="tr"></span><span class="fl" id="p-fl"></span>
     <input type="range" id="p-min" min="0" max="500" step="10" value="0" aria-label="Minimum price">
@@ -111,7 +111,7 @@
     <div class="field"><label for="pmin">Minimum</label><input class="input" id="pmin" inputmode="numeric" value="RM 0"></div>
     <div class="field"><label for="pmax">Maximum</label><input class="input" id="pmax" inputmode="numeric" value="RM 500+"></div>
   </div>
-  <div class="sh-foot"><button class="btn btn--ghost" id="p-clr">Clear</button><button class="btn btn--primary" data-close>Done</button></div>
+  <div class="sheet-foot row-2"><button class="btn btn--ghost" id="p-clr">Clear</button><button class="btn btn--primary" data-close>Done</button></div>
 </div>
   <script>
   (function () {

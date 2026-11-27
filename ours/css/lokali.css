@@ -835,3 +835,20 @@ body.m .exp-card__img, body.m .exp-card__img > img:first-child { border-radius: 
 .exp-card__verified .ph-fill { font-size: 15px; color: #3BA4E8; line-height: 1; }
 .tile-grid .exp-card__verified { display: none; }
 .exp-card__score .ph-fill { color: var(--star); } /* gold star icon, number stays ink */
+
+/* From the Canopy copy (teammate, 26–27 Nov): one bottom sheet pattern + one verified blue */
+/* sheet footer: actions stick to the bottom of every bottom sheet, full width, centred (26 Nov).
+   One action → one full-width button. Two equal choices (Clear / Done) → side by side, main one wider.
+   Decision pairs (destructive + keep) → stacked, the safe choice last. */
+.sheet:has(> .sheet-foot) { padding-bottom: 0 !important; }
+.sheet-foot { position: sticky; bottom: 0; z-index: 2; display: flex; flex-direction: column; gap: 8px; margin: 16px calc(-1 * var(--s4)) 0; padding: 12px var(--s4) calc(var(--home) + 16px); background: inherit; }
+.sheet-foot .btn { width: 100%; margin: 0 !important; justify-content: center; }
+.sheet-foot.row-2 { flex-direction: row; } .sheet-foot.row-2 .btn { width: auto; flex: 1; } .sheet-foot.row-2 .btn--primary { flex: 2; }
+/* verified badge: one light blue everywhere (27 Nov) */
+:root { --verified: #3BA4E8; }
+.ph-seal-check[aria-label="Identity verified"], .ph-seal-check.is-verified { color: var(--verified) !important; }
+/* bottom sheet title: one style on every sheet (27 Nov). Large bold title, then an optional intro line. */
+body.m .sheet .sheet-title { font-size: 22px !important; line-height: 28px !important; font-weight: 700 !important; letter-spacing: -.01em; color: var(--ink) !important; margin: 0 !important; }
+body.m .sheet .sheet-title + p { margin-top: 8px !important; }
+body.m .sheet .sh-top:has(.sheet-title) { padding-bottom: 8px !important; }
+body.m .sheet .sh-top:has(.sheet-title) + * { margin-top: 0 !important; }

@@ -97,7 +97,7 @@ document.getElementById('mapbox').addEventListener('click', function (ev) { var 
   .f-foot .btn--primary { flex: 1; }
 </style>
 <div class="sheet" id="sh-f" role="dialog" aria-labelledby="f-h" hidden>
-  <div class="row-between"><h3 id="f-h">Filters</h3><button class="icon-btn" data-close aria-label="Close filters"><i class="ph ph-x" aria-hidden="true"></i></button></div>
+  <div class="row-between"><h3 id="f-h" class="sheet-title">Filters</h3><button class="icon-btn" data-close aria-label="Close filters"><i class="ph ph-x" aria-hidden="true"></i></button></div>
   <section class="f-sec"><div class="f-head"><h4>Sort by</h4></div>
     <div class="f-pills" role="radiogroup" aria-label="Sort by" data-one id="f-sort">
       <button class="f-pill" role="radio" aria-checked="true"><i class="ph ph-sparkle" aria-hidden="true"></i>Recommended</button><button class="f-pill" role="radio" aria-checked="false"><i class="ph ph-arrow-down" aria-hidden="true"></i>Lowest price</button><button class="f-pill" role="radio" aria-checked="false"><i class="ph ph-star" aria-hidden="true"></i>Highest rated</button><button class="f-pill" role="radio" aria-checked="false"><i class="ph ph-navigation-arrow" aria-hidden="true"></i>Nearest</button></div></section>
@@ -109,7 +109,7 @@ document.getElementById('mapbox').addEventListener('click', function (ev) { var 
     <div class="f-pills" id="f-time"><button class="f-pill" aria-pressed="false"><i class="ph ph-sun-horizon" aria-hidden="true"></i>Morning</button><button class="f-pill" aria-pressed="false"><i class="ph ph-sun" aria-hidden="true"></i>Afternoon</button><button class="f-pill" aria-pressed="false"><i class="ph ph-cloud-sun" aria-hidden="true"></i>Evening</button><button class="f-pill" aria-pressed="false"><i class="ph ph-moon-stars" aria-hidden="true"></i>Night</button></div></section>
   <section class="f-sec"><div class="f-head"><h4>Duration</h4><span id="fv-dur"></span></div>
     <div class="f-pills" id="f-dur"><button class="f-pill" aria-pressed="false">Under 3 h</button><button class="f-pill" aria-pressed="false">Half day</button><button class="f-pill" aria-pressed="false">Full day</button><button class="f-pill" aria-pressed="false">Multi-day</button></div></section>
-  <div class="f-foot"><button class="btn btn--ghost" id="f-clr">Clear all</button><button class="btn btn--primary" data-close id="f-show">Show 18 experiences</button></div>
+  <div class="sheet-foot row-2"><button class="btn btn--ghost" id="f-clr">Clear all</button><button class="btn btn--primary" data-close id="f-show">Show 18 experiences</button></div>
 </div>
 <script>
 (function () {
