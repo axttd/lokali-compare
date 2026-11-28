@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lokali Home · three versions</title>
+<style>*{box-sizing:border-box;margin:0}body{font:400 15px/20px system-ui,-apple-system,sans-serif;color:#222;background:#F3F3F1;padding:16px}
+.bar{position:sticky;top:0;z-index:5;display:flex;justify-content:center;padding:8px 0 16px;background:#F3F3F1}.seg{display:inline-flex;padding:4px;border-radius:14px;background:#e4e4e0}
+.seg button{min-height:44px;padding:0 14px;border:0;border-radius:10px;background:none;font:600 14px system-ui;color:#555;cursor:pointer}
+.seg button[aria-pressed=true]{background:#fff;color:#222;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.wrap{display:flex;gap:32px;justify-content:center;align-items:flex-start}.col b{display:block;margin-bottom:8px}.col b small{font-weight:400;color:#777}
+.ph{width:402px;max-width:calc(100vw - 32px);border-radius:32px;overflow:hidden;background:#fff;box-shadow:0 12px 40px rgba(0,0,0,.12)}iframe{display:block;width:402px;max-width:100%;height:900px;border:0}
+@media(max-width:1319px){.col.off{display:none}.col b{display:none}}@media(min-width:1320px){.bar{display:none}}</style></head>
+<body><div class="bar"><div class="seg" role="group" aria-label="Version"><button type="button" data-v="a" aria-pressed="false">Hers</button><button type="button" data-v="b" aria-pressed="false">Ours 0.20.1</button><button type="button" data-v="c" aria-pressed="true">New concept</button></div></div>
+<div class="wrap">
+<div class="col off" id="ca"><b>Hers <small>Lokali latest</small></b><div class="ph"><iframe id="a" src="pages/g-home.html" title="Hers"></iframe></div></div>
+<div class="col off" id="cb"><b>Ours <small>0.20.1</small></b><div class="ph"><iframe id="b" src="ours/pages/g-home.html" title="Ours"></iframe></div></div>
+<div class="col" id="cc"><b>New concept <small>People of the place</small></b><div class="ph"><iframe id="c" src="ours/pages/g-home-concept.html" title="New concept"></iframe></div></div>
+</div>
+<script>{
+['a','b','c'].forEach(function(id){var f=document.getElementById(id);f.addEventListener('load',function(){var d=f.contentDocument;d.documentElement.classList.add('in-phone');
+function fit(){d.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')});var t=d.querySelector('.tabbar');d.body.style.position='relative';if(t){t.style.position='absolute';t.style.bottom='16px';}f.style.height=d.documentElement.scrollHeight+'px';}
+setTimeout(fit,800);setTimeout(fit,2500);});});
+document.querySelector('.seg').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var v=b.dataset.v;
+this.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+['a','b','c'].forEach(function(k){document.getElementById('c'+k).classList.toggle('off',k!==v)});window.scrollTo(0,0);});
+}</script></body></html>
